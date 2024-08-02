@@ -1,27 +1,29 @@
 import "./ModalWithForm.css";
-import union from "../../assets/Union.svg";
+import close from "../../assets/close-gray.svg";
 
 function ModalWithForm({
   children,
+  titleText,
   buttonText,
-  title,
-  activeModal,
   handleCloseClick,
+  isOpened,
 }) {
   return (
-    <div className={`modal ${activeModal === "add-garment" && "modal_opened"}`}>
-      <div className="modal__content">
-        <h2 className="modal__title">{title}</h2>
-        <button
-          onClick={handleCloseClick}
-          type="button"
-          className="modal__close"
-        >
-          <img className="close__btn" src={union} alt="close" />
+    <div className={`modal ${isOpened && "modal_opened"}`}>
+      <div className="modal__container">
+        <button className="modal__close" type="button">
+          <img
+            src={close}
+            alt="close-button"
+            className="modal__close-image"
+            onClick={handleCloseClick}
+          />
         </button>
+
+        <p className="modal__title">{titleText}</p>
         <form className="modal__form">
           {children}
-          <button type="submit" className="modal__submit">
+          <button type="button" className="modal__submit">
             {buttonText}
           </button>
         </form>

@@ -1,4 +1,6 @@
 .footer {
   display: flex;
   justify-content: space-between;
+  padding: 24px 0;
+  font: 500 16px/20px Cabinet Grotesk, Arial, sans-serif;
 }
