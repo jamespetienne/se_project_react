@@ -1,5 +1,4 @@
 import "./ItemCard.css";
-import "./ItemCard.css";
 
 function ItemCard({ item, handleCardClick }) {
   const openPreview = () => {
