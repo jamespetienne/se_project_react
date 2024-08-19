@@ -77,7 +77,15 @@ function App() {
             isMobileMenuOpened={isMobileMenuOpened}
           />
           <Footer />
-          <AddItemModal />
+
+          {activeModal === "add-garment" && (
+            <AddItemModal
+              handleCloseClick={handleCloseClick}
+              handleOptionChange={handleOptionChange}
+              selectedOption={selectedOption}
+            />
+          )}
+
           <ItemModal
             isOpened={activeModal === "preview"}
             selectedCard={selectedCard}

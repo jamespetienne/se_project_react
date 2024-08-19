@@ -6,12 +6,13 @@ const AddItemModal = ({
   handleCloseClick,
   handleOptionChange,
   selectedOption,
+  isOpened
 }) => {
   return (
     <ModalWithForm
       titleText="New garment"
       buttonText="Add garment"
-      isOpened={activeModal === "add-garment"}
+      isOpened={isOpened}
       handleCloseClick={handleCloseClick}
     >
       {" "}
