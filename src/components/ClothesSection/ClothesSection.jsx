@@ -1,38 +1,30 @@
-import React from "react";
-import ItemCard from "../ItemCard/ItemCard";
-import AddItemModal from "../AddItemModal/AddItemModal";
 import "./ClothesSection.css";
+import ItemCard from "../ItemCard/ItemCard";
 
-const ClothesSection = ({ clothingItems, onAddItem, onDeleteItem }) => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-  const handleAddClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
+function ClothesSection({ handleCardClick, clothingItems, onAddItem }) {
   return (
     <div className="clothes-section">
-      <button className="clothes-section__add-button" onClick={handleAddClick}>
-        + Add Clothes
-      </button>
-      <ul className="clothes-section__list">
+      <div className="section__title_btn">
+        <p>Your items</p>
+        <button
+          className="header__add-clothes-btn"
+          type="button"
+          onClick={onAddItem}
+        >
+          + Add New
+        </button>
+      </div>
+      <ul className="cards__list">
         {clothingItems.map((item) => (
-          <ItemCard key={item._id} item={item} onDeleteItem={onDeleteItem} />
+          <ItemCard
+            key={item._id}
+            item={item}
+            handleCardClick={handleCardClick}
+          />
         ))}
       </ul>
-      {isModalOpen && (
-        <AddItemModal
-          isOpen={isModalOpen}
-          onAddItem={onAddItem}
-          onCloseModal={handleCloseModal}
-        />
-      )}
     </div>
   );
-};
+}
 
 export default ClothesSection;

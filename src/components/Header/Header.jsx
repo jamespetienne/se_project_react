@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./Header.css";
 import logo from "../../assets/logo.png";
 import avatar from "../../assets/avatar.png";
@@ -23,7 +25,9 @@ function Header({
           isMobileMenuOpened ? "header__nav_mobile" : ""
         }`}
       >
-        <img src={logo} alt="Logo" className="header__logo" />
+        <Link to="/">
+          <img src={logo} alt="Logo" className="header__logo" />
+        </Link>
         <p className="header__date-location">
           {currentDate}, {weatherData.city}
         </p>
@@ -56,8 +60,10 @@ function Header({
           >
             + Add Clothes
           </button>
-          <p className="header__user-name">Terrence Tegegne</p>
-          <img src={avatar} alt="user-image" className="header__user-image" />
+          <Link to="/profile" className="header__link">
+            <p className="header__user-name">Terrence Tegegne</p>
+            <img src={avatar} alt="user-image" className="header__user-image" />
+          </Link>
         </div>
       </nav>
     </header>

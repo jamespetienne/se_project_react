@@ -1,0 +1,6 @@
+.section__title_btn {
+  display: flex;
+  padding-left: 40px;
+  gap: 20px;
+  margin: 0;
+}

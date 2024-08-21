@@ -1,21 +1,36 @@
-import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useState } from "react";
 import "./AddItemModal.css";
 
-const AddItemModal = ({
+function AddItemModal({
   handleCloseClick,
   handleOptionChange,
   selectedOption,
-  isOpened
-}) => {
+  isOpened,
+  handleAddItem,
+}) {
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleImgUrlChange = (e) => {
+    setLink(e.target.value);
+  };
+
   return (
     <ModalWithForm
       titleText="New garment"
       buttonText="Add garment"
       isOpened={isOpened}
       handleCloseClick={handleCloseClick}
+      handleSubmit={(e) => {
+        handleAddItem(e, { name, imageUrl: link, weatherType: selectedOption });
+      }}
+      handleOptionChange={handleOptionChange}
     >
-      {" "}
       <label htmlFor="name" className="modal__label">
         Name
         <input
@@ -23,6 +38,8 @@ const AddItemModal = ({
           className="modal__input"
           id="name"
           placeholder="Name"
+          value={name}
+          onChange={handleNameChange}
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -33,6 +50,8 @@ const AddItemModal = ({
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
+          value={link}
+          onChange={handleImgUrlChange}
         />
       </label>
       <fieldset className="modal__radio-buttons">
@@ -73,6 +92,6 @@ const AddItemModal = ({
       </fieldset>
     </ModalWithForm>
   );
-};
+}
 
 export default AddItemModal;

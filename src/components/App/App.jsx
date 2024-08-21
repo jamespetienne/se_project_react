@@ -1,13 +1,16 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../context/CurrentTemperatureUnitContext";
+import { Routes, Route } from "react-router-dom";
+import { getItems, postItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -21,6 +24,8 @@ function App() {
   const [isMobileMenuOpened, setMobileMenuOpened] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
+  const [deleteModal, setDeleteModal] = useState("");
 
   const handleCardClick = (selectedCard) => {
     setActiveModal("preview");
@@ -37,6 +42,10 @@ function App() {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpened((prev) => !prev);
+  };
+
+  const handleCloseModal = () => {
+    setActiveModal("");
   };
 
   const handleOptionChange = (event) => {
@@ -58,6 +67,55 @@ function App() {
       .catch(console.error);
   }, []);
 
+  const handleAddItem = (e, data) => {
+    console.log("Add button clicked");
+    e.preventDefault();
+
+    const newClothingItem = {
+      name: data.name,
+      imageUrl: data.imageUrl,
+      weather: selectedOption,
+    };
+
+    postItem(newClothingItem)
+      .then((data) => {
+        setClothingItems([data, ...clothingItems]);
+        handleCloseModal();
+      })
+      .catch((err) => console.error("Failed to post item:", err));
+  };
+
+  const handleDeleteItem = (item) => {
+    console.log("Item to delete:", item);
+    deleteItem(item)
+      .then(() => {
+        setClothingItems(
+          clothingItems.filter((clothingItem) => clothingItem._id !== item._id)
+        );
+        console.log(clothingItems);
+        handleDeleteClose();
+        handleCloseModal();
+      })
+      .catch(console.error);
+  };
+
+  const openDeleteModal = () => {
+    setDeleteModal("delete");
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteModal("");
+  };
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="page">
       <div className="page__content">
@@ -71,11 +129,31 @@ function App() {
             isMobileMenuOpened={isMobileMenuOpened}
             handleCloseClick={handleCloseClick}
           />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            isMobileMenuOpened={isMobileMenuOpened}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  isMobileMenuOpened={isMobileMenuOpened}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                  onAddItem={handleAddItem}
+                  onDeleteItem={handleDeleteItem}
+                />
+              }
+            />
+          </Routes>
+
           <Footer />
 
           {activeModal === "add-garment" && (
@@ -83,6 +161,8 @@ function App() {
               handleCloseClick={handleCloseClick}
               handleOptionChange={handleOptionChange}
               selectedOption={selectedOption}
+              isOpened={activeModal === "add-garment"}
+              handleAddItem={handleAddItem}
             />
           )}
 
@@ -90,6 +170,10 @@ function App() {
             isOpened={activeModal === "preview"}
             selectedCard={selectedCard}
             handleCloseClick={handleCloseClick}
+            deleteModal={deleteModal}
+            openDeleteModal={openDeleteModal}
+            handleDeleteClose={handleDeleteClose}
+            handleDeleteItem={handleDeleteItem}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>
