@@ -20,15 +20,26 @@ function AddItemModal({
     setLink(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      name,
+      imageUrl: link,
+    };
+    handleAddItem(e, data);
+    setName("");
+    setLink("");
+  };
+
+  if (!isOpened) return null;
+
   return (
     <ModalWithForm
       titleText="New garment"
       buttonText="Add garment"
       isOpened={isOpened}
       handleCloseClick={handleCloseClick}
-      handleSubmit={(e) => {
-        handleAddItem(e, { name, imageUrl: link, weatherType: selectedOption });
-      }}
+      handleSubmit={handleSubmit}
       handleOptionChange={handleOptionChange}
     >
       <label htmlFor="name" className="modal__label">
@@ -46,7 +57,7 @@ function AddItemModal({
         Image
         <span className="modal__error"> (This is not an Email.)</span>
         <input
-          type="link"
+          type="text"
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
@@ -61,8 +72,8 @@ function AddItemModal({
             id="hot"
             type="radio"
             className="modal__radio-input"
-            value="1"
-            checked={selectedOption === "1"}
+            value="hot"
+            checked={selectedOption === "hot"}
             onChange={handleOptionChange}
           />
           Hot
@@ -72,8 +83,8 @@ function AddItemModal({
             id="warm"
             type="radio"
             className="modal__radio-input"
-            value="2"
-            checked={selectedOption === "2"}
+            value="warm"
+            checked={selectedOption === "warm"}
             onChange={handleOptionChange}
           />
           Warm
@@ -83,8 +94,8 @@ function AddItemModal({
             id="cold"
             type="radio"
             className="modal__radio-input"
-            value="3"
-            checked={selectedOption === "3"}
+            value="cold"
+            checked={selectedOption === "cold"}
             onChange={handleOptionChange}
           />
           Cold

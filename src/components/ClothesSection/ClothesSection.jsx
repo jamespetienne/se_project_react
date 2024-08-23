@@ -1,7 +1,7 @@
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({ handleCardClick, clothingItems, onAddItem }) {
+function ClothesSection({ handleCardClick, clothingItems, handleAddClick }) {
   return (
     <div className="clothes-section">
       <div className="section__title_btn">
@@ -9,7 +9,7 @@ function ClothesSection({ handleCardClick, clothingItems, onAddItem }) {
         <button
           className="header__add-clothes-btn"
           type="button"
-          onClick={onAddItem}
+          onClick={handleAddClick}
         >
           + Add New
         </button>

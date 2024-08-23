@@ -1,5 +1,3 @@
-import { useState } from "react";
-import React from "react";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import "./ItemModal.css";
 import close from "../../assets/close-white.png";
@@ -30,17 +28,21 @@ function ItemModal({
           className="modal__card_image"
         />
         <div className="modal__footer">
-          <h2 className="modal__card_name">{selectedCard.name}</h2>
-          <p className="modal__card_weather">Weather: {selectedCard.weather}</p>
-        </div>
-        <div className="modal__footer_delete">
-          <button
-            type="button"
-            className="modal__card_delete"
-            onClick={openDeleteModal}
-          >
-            Delete Item
-          </button>
+          <div className="modal__footer_title">
+            <h2 className="modal__card_name">{selectedCard.name}</h2>
+            <p className="modal__card_weather">
+              Weather: {selectedCard.weather}
+            </p>
+          </div>
+          <div className="modal__footer_delete">
+            <button
+              type="button"
+              className="modal__card_delete"
+              onClick={openDeleteModal}
+            >
+              Delete Item
+            </button>
+          </div>
         </div>
       </div>
       <DeleteModal

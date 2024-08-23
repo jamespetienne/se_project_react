@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -15,7 +15,7 @@ import { getItems, postItem, deleteItem } from "../../utils/api";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "cold",
-    temp: { F: 999 },
+    temp: { F: 999, C: 999 },
     city: "",
     isDay: true,
   });
@@ -61,16 +61,13 @@ function App() {
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filterData = filterWeatherData(data);
-        console.log(filterData);
         setWeatherData(filterData);
       })
       .catch(console.error);
   }, []);
 
-  const handleAddItem = (e, data) => {
-    console.log("Add button clicked");
+  const handleAddItem = (e, data = { name: "", imageUrl: "" }) => {
     e.preventDefault();
-
     const newClothingItem = {
       name: data.name,
       imageUrl: data.imageUrl,
@@ -86,13 +83,11 @@ function App() {
   };
 
   const handleDeleteItem = (item) => {
-    console.log("Item to delete:", item);
     deleteItem(item)
       .then(() => {
         setClothingItems(
           clothingItems.filter((clothingItem) => clothingItem._id !== item._id)
         );
-        console.log(clothingItems);
         handleDeleteClose();
         handleCloseModal();
       })
@@ -110,7 +105,6 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log(data);
         setClothingItems(data);
       })
       .catch(console.error);
@@ -147,7 +141,7 @@ function App() {
                 <Profile
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
-                  onAddItem={handleAddItem}
+                  handleAddClick={handleAddClick}
                   onDeleteItem={handleDeleteItem}
                 />
               }
