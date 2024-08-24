@@ -1,5 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddItemModal.css";
 
 function AddItemModal({
@@ -24,6 +24,12 @@ function AddItemModal({
     setLink("");
   };
 
+  useEffect(() => {
+    if (isOpened) {
+      resetForm();
+    }
+  }, [isOpened]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -31,11 +37,9 @@ function AddItemModal({
       imageUrl: link,
     };
     handleAddItem(e, data);
-    resetForm();
   };
 
   const handleCloseModal = () => {
-    resetForm();
     handleCloseClick();
   };
 
