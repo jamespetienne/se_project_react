@@ -1,50 +1,57 @@
-import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import "./AddItemModal.css";
 
-const AddItemModal = ({ handleCloseClick, isOpened, handleAddItem }) => {
+function AddItemModal({
+  handleCloseClick,
+  handleOptionChange,
+  isOpened,
+  handleAddItem,
+}) {
   const [name, setName] = useState("");
+  const [link, setLink] = useState("");
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
-  const [link, setUrl] = useState("");
-  const handleUrlChange = (e) => {
-    setUrl(e.target.value);
+  const handleImgUrlChange = (e) => {
+    setLink(e.target.value);
+  };
+
+  const resetForm = () => {
+    setName("");
+    setLink("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !link || !weather) {
-      alert("All fields are required");
-      return;
-    }
-    handleAddItem({ name, link, weather });
+    const data = {
+      name,
+      imageUrl: link,
+    };
+    handleAddItem(e, data);
+    resetForm();
   };
 
-  useEffect(() => {
-    setName("");
-    setUrl("");
-    setWeather("");
-  }, [isOpened]);
-
-  const [weather, setWeather] = useState("");
-  const handleWeatherChange = (e) => {
-    console.log(e.target.value);
-    setWeather(e.target.value);
+  const handleCloseModal = () => {
+    resetForm();
+    handleCloseClick();
   };
+
+  if (!isOpened) return null;
 
   return (
     <ModalWithForm
-      title="New garment"
+      titleText="New garment"
       buttonText="Add garment"
       isOpened={isOpened}
-      handleCloseClick={handleCloseClick}
-      onSubmit={handleSubmit}
-      onChange={handleWeatherChange}
+      handleCloseClick={handleCloseModal}
+      handleSubmit={handleSubmit}
+      handleOptionChange={handleOptionChange}
     >
       <label htmlFor="name" className="modal__label">
-        Name{" "}
+        Name
         <input
           type="text"
           className="modal__input"
@@ -55,54 +62,52 @@ const AddItemModal = ({ handleCloseClick, isOpened, handleAddItem }) => {
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
-        Image{" "}
+        Image
+        <span className="modal__error"> (This is not an Email.)</span>
         <input
-          type="url"
+          type="text"
           className="modal__input"
           id="imageUrl"
-          placeholder="image Url"
+          placeholder="Image URL"
           value={link}
-          onChange={handleUrlChange}
+          onChange={handleImgUrlChange}
         />
       </label>
       <fieldset className="modal__radio-buttons">
-        <legend className="modal__legend">Select the weather type</legend>
+        <legend className="modal__legend">Select the weathe type:</legend>
         <label htmlFor="hot" className="modal__label modal__label_type_radio">
           <input
-            name="input"
             id="hot"
             type="radio"
-            value="hot"
             className="modal__radio-input"
-            onChange={handleWeatherChange}
-          />{" "}
+            value="hot"
+            onChange={handleOptionChange}
+          />
           Hot
         </label>
         <label htmlFor="warm" className="modal__label modal__label_type_radio">
           <input
-            name="input"
             id="warm"
-            value="warm"
             type="radio"
             className="modal__radio-input"
-            onChange={handleWeatherChange}
-          />{" "}
+            value="warm"
+            onChange={handleOptionChange}
+          />
           Warm
         </label>
         <label htmlFor="cold" className="modal__label modal__label_type_radio">
           <input
-            name="input"
             id="cold"
-            value="cold"
             type="radio"
             className="modal__radio-input"
-            onChange={handleWeatherChange}
-          />{" "}
+            value="cold"
+            onChange={handleOptionChange}
+          />
           Cold
         </label>
       </fieldset>
     </ModalWithForm>
   );
-};
+}
 
 export default AddItemModal;

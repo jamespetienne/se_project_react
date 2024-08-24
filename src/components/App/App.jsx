@@ -62,7 +62,10 @@ function App() {
       .catch(console.error);
   }, []);
 
-  const handleAddItem = (e, data = { name: "", imageUrl: "" }) => {
+  const handleAddItem = (
+    e,
+    data = { name: "", imageUrl: "", selectedOption }
+  ) => {
     e.preventDefault();
     const newClothingItem = {
       name: data.name,
