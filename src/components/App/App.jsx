@@ -36,10 +36,6 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const handleCloseClick = () => {
-    setActiveModal("");
-  };
-
   const toggleMobileMenu = () => {
     setMobileMenuOpened((prev) => !prev);
   };
@@ -121,7 +117,7 @@ function App() {
             weatherData={weatherData}
             toggleMobileMenu={toggleMobileMenu}
             isMobileMenuOpened={isMobileMenuOpened}
-            handleCloseClick={handleCloseClick}
+            handleCloseClick={handleCloseModal}
           />
           <Routes>
             <Route
@@ -152,7 +148,7 @@ function App() {
 
           {activeModal === "add-garment" && (
             <AddItemModal
-              handleCloseClick={handleCloseClick}
+              handleCloseClick={handleCloseModal}
               handleOptionChange={handleOptionChange}
               selectedOption={selectedOption}
               isOpened={activeModal === "add-garment"}
@@ -163,7 +159,7 @@ function App() {
           <ItemModal
             isOpened={activeModal === "preview"}
             selectedCard={selectedCard}
-            handleCloseClick={handleCloseClick}
+            handleCloseClick={handleCloseModal}
             deleteModal={deleteModal}
             openDeleteModal={openDeleteModal}
             handleDeleteClose={handleDeleteClose}
