@@ -1,3 +1,5 @@
+import "./Main.css";
+
 import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import React from "react";
