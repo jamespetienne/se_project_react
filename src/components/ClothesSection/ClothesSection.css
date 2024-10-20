@@ -1,6 +1,43 @@
-.section__title_btn {
+.clothesSection__page {
+  margin-left: 116px;
+}
+
+.clothesSection__nav {
   display: flex;
-  padding-left: 40px;
+  flex-direction: row;
   gap: 20px;
+  padding-top: 35px;
+}
+
+.clothesSection__title {
   margin: 0;
+  width: 94px;
+  height: 25px;
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 25px;
+  color: rgba(0, 0, 0, 1);
+  white-space: nowrap;
+}
+
+.clothesSection__list {
+  width: 1015px;
+  height: 676px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 328px 328px 328px;
+  grid-column: 3;
+  grid-row: 2;
+  gap: 20px 20px;
+}
+
+.clothesSection__add-new-btn {
+  border: none;
+  height: 25px;
+  width: 88px;
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  line-height: 25px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
 }

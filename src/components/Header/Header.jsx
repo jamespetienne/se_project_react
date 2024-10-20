@@ -1,69 +1,98 @@
-import { Link } from "react-router-dom";
-
+import headerLogo from "../../assets/logo.png";
 import "./Header.css";
-import logo from "../../assets/logo.png";
-import avatar from "../../assets/avatar.png";
-import menu from "../../assets/menu-icon.png";
-import close from "../../assets/close-gray.svg";
+import { Link } from "react-router-dom";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 function Header({
   handleAddClick,
+  handleLogInClick,
+  handleSignUpClick,
   weatherData,
-  toggleMobileMenu,
-  isMobileMenuOpened,
+  isLoggedIn,
 }) {
-  const currentDate = new Date().toLocaleString("default", {
-    month: "long",
-    day: "numeric",
-  });
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const DateComponent = () => {
+    const currentDate = new Date();
+    const options = {
+      month: "long",
+      day: "numeric",
+    };
+    const formattedDate = currentDate.toLocaleDateString("en-US", options);
+    return (
+      <h2 className="date">
+        {formattedDate}, {weatherData.city}
+      </h2>
+    );
+  };
+
+  const getInitials = (name) => {
+    return name ? name.charAt(0).toUpperCase() : "";
+  };
+
+  const profileLogin = (isLoggedIn) => {
+    if (isLoggedIn && currentUser) {
+      return (
+        <>
+          <button
+            className="header__add-clothes-btn"
+            type="button"
+            onClick={handleAddClick}
+          >
+            +Add Clothes
+          </button>
+          <p className="header__username">{currentUser.name}</p>
+          <Link to="/profile">
+            {currentUser.avatar ? (
+              <img
+                src={currentUser.avatar}
+                alt="User Avatar"
+                className="header__avatar"
+              />
+            ) : (
+              <div className="header__avatar-placeholder">
+                {getInitials(currentUser.name)}
+              </div>
+            )}
+          </Link>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <button
+            className="header__sign-up-btn"
+            type="button"
+            onClick={handleSignUpClick}
+          >
+            Sign Up
+          </button>
+          <button
+            className="header__log-in-btn"
+            type="button"
+            onClick={handleLogInClick}
+          >
+            Log In
+          </button>
+        </>
+      );
+    }
+  };
 
   return (
-    <header className="header">
-      <nav
-        className={`header__nav ${
-          isMobileMenuOpened ? "header__nav_mobile" : ""
-        }`}
-      >
+    <header>
+      <nav className="header">
         <Link to="/">
-          <img src={logo} alt="Logo" className="header__logo" />
+          <img className="header__logo" src={headerLogo} alt="App Logo" />
         </Link>
-        <p className="header__date-location">
-          {currentDate}, {weatherData.city}
-        </p>
-        {isMobileMenuOpened ? (
-          <button className=" header__menu_close" type="button">
-            <img
-              src={close}
-              alt="close-icon"
-              className="  header__menu_close_img"
-              onClick={toggleMobileMenu}
-            />
-          </button>
-        ) : (
-          <button className="header__menu" type="button">
-            <img
-              src={menu}
-              alt="menu-icon"
-              className="header__menu_img"
-              onClick={toggleMobileMenu}
-            />
-          </button>
-        )}
+        <DateComponent />
 
         <div className="header__user-container">
           <ToggleSwitch />
-          <button
-            type="button"
-            onClick={handleAddClick}
-            className="header__add-clothes-btn"
-          >
-            + Add Clothes
-          </button>
-          <Link to="/profile" className="header__link">
-            <p className="header__user-name">Terrence Tegegne</p>
-            <img src={avatar} alt="user-image" className="header__user-image" />
-          </Link>
+
+          {profileLogin(isLoggedIn)}
         </div>
       </nav>
     </header>

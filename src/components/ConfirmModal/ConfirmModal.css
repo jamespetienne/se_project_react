@@ -1,0 +1,14 @@
+.modal__confirm-button {
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+  padding: 8, 16;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(255, 77, 0, 1);
+  text-align: center;
+  white-space: nowrap;
+}

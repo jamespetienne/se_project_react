@@ -1,10 +1,57 @@
-.sidebar {
+.sidebar-page {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  width: 229px;
+  height: 229px;
+  width: 138px;
+  margin-top: 19px;
+  margin-right: 116px;
+  flex-direction: column;
+}
+
+.sidebar__username-wrapper {
+  display: flex;
+}
+
+.sidebar__username {
+  margin-top: 16px;
+  width: 157px;
+  height: 25px;
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 25px;
+  white-space: nowrap;
 }
 
 .sidebar__avatar {
-  height: 40px;
+  width: 56px;
+  height: 56px;
+  margin-right: 16px;
+  border: 1px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.sidebar__change-prof {
+  top: 100px;
+  width: 171px;
+  height: 25px;
+  color: rgba(0, 0, 0, 1);
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 25px;
+  white-space: nowrap;
+  padding: 0;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  border: 1px;
+}
+
+.sidebar__signout-btn {
+  width: 65px;
+  height: 25px;
+  border: 1px;
+  color: rgba(0, 0, 0, 1);
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 25px;
+  white-space: nowrap;
+  padding: 0;
 }

@@ -1,51 +1,105 @@
 .header {
-  font: 500 20px/24px Cabinet Grotesk, Arial, sans-serif;
-}
-
-.header__nav {
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 32px 0 28px;
+  padding-top: 32px;
+  white-space: nowrap;
+  max-height: 40px;
+  margin-bottom: 28px;
 }
 
 .header__logo {
-}
-
-.header__date-location {
-  margin-left: 24px;
+  margin-right: 24px;
 }
 
 .header__user-container {
   display: flex;
-  margin-left: auto;
-  align-items: center;
+  width: 293px;
+  height: 25px;
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  line-height: 24px;
+  margin-left: 666px;
+}
+
+.header__username {
+  margin-top: 8px;
+  margin-bottom: 7px;
+  margin-right: 12px;
+  max-width: 157px;
+  max-height: 25px;
+  font-size: 20px;
+  line-height: 25px;
 }
 
 .header__add-clothes-btn {
-  border-style: none;
-  cursor: pointer;
-  background-color: transparent;
-}
-
-.header__user-name {
-  margin-left: 20px;
-  margin-right: 12px;
-}
-
-.header__user-image {
-  height: 40px;
-}
-
-.header__menu {
-  visibility: hidden;
   border: none;
+  max-width: 116px;
+  max-height: 24px;
+  line-height: 24px;
+  font-size: 20px;
+  margin: 8px 20px 8px 20px;
+  padding: 0;
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
 }
 
-.header__link {
-  text-decoration: none;
-  color: #000;
+.header__sign-up-btn {
+  border: none;
+  max-width: 116px;
+  max-height: 24px;
+  line-height: 24px;
+  font-size: 20px;
+  margin: 8px 20px 8px 20px;
+  padding: 0;
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+}
+
+.header__log-in-btn {
+  border: none;
+  max-width: 116px;
+  max-height: 24px;
+  line-height: 24px;
+  font-size: 20px;
+  margin: 8px 20px 8px 20px;
+  padding: 0;
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+}
+
+.date {
+  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
+  height: 24px;
+  width: 160px;
+
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 11px;
+  margin-bottom: 4px;
+}
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border: 1px;
+  margin-right: 40px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 700px) {
+  .header {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 620px) {

@@ -1,34 +1,42 @@
 import "./ModalWithForm.css";
-import close from "../../assets/close-gray.svg";
 
 function ModalWithForm({
   children,
-  titleText,
   buttonText,
-  handleCloseClick,
-  isOpened,
-  handleSubmit,
+  title,
+  isOpen,
+  closeActiveModal,
+  orModal,
+  onSubmit,
+  spanText,
 }) {
   return (
-    <div className={`modal ${isOpened && "modal_opened"}`}>
-      <div className="modal__container">
-        <button className="modal__close" type="button">
-          <img
-            src={close}
-            alt="close-button"
-            className="modal__close-image"
-            onClick={handleCloseClick}
-          />
-        </button>
-
-        <p className="modal__title">{titleText}</p>
-        <form onSubmit={handleSubmit} className="modal__form">
-          {children}
-          <button type="submit" className="modal__submit">
+    <div className={`modal ${isOpen ? "modal_open" : ""}`}>
+      <form className="modal__form" onSubmit={onSubmit}>
+        <h2 className="modal__title">{title}</h2>
+        <button
+          type="button"
+          onClick={closeActiveModal}
+          className="modal__close"
+        ></button>
+        {children}
+        <div className="modal__login-wrapper">
+          <button className="modal__submit-button" type="submit">
             {buttonText}
           </button>
-        </form>
-      </div>
+          <button
+            className="modal__span-button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log("Switching Modals");
+              orModal();
+            }}
+          >
+            {spanText}
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

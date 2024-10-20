@@ -3,26 +3,30 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import "./Profile.css";
 
 function Profile({
+  weatherData,
   handleCardClick,
   clothingItems,
   handleAddClick,
-  onDeleteItem,
+  onSignOut,
+  handleEditClick,
+  onCardLike,
 }) {
   return (
-    <div className="profile">
-      <section className="profile__sidebar">
-        <SideBar />
-      </section>
-      <section className="profile__clothing-items">
-        <ClothesSection
-          handleCardClick={handleCardClick}
-          handleAddClick={handleAddClick}
-          onDeleteItem={onDeleteItem}
-          clothingItems={clothingItems}
-        />
-      </section>
+    <div className="profile__page">
+      <SideBar
+        weatherData={weatherData}
+        onSignOut={onSignOut}
+        handleEditClick={handleEditClick}
+      />
+
+      <ClothesSection
+        weatherData={weatherData}
+        handleCardClick={handleCardClick}
+        clothingItems={clothingItems}
+        handleAddClick={handleAddClick}
+        onCardLike={onCardLike}
+      />
     </div>
   );
 }
-
 export default Profile;

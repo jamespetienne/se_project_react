@@ -1,25 +1,29 @@
-import "./Main.css";
-import WeatherCard from "../WeatherCard/WeatherCard";
-import ItemCard from "../ItemCard/ItemCard";
-import { useContext } from "react";
-import { CurrentTemperatureUnitContext } from "../../context/CurrentTemperatureUnitContext";
+import WeatherCard from "../WeatherCard/WeatherCard.jsx";
+import ItemCard from "../ItemCard/ItemCard.jsx";
+import React from "react";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
 
 function Main({
   weatherData,
   handleCardClick,
-  isMobileMenuOpened,
   clothingItems,
+  onCardLike,
+  deleteCard,
 }) {
-  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const { currentTemperatureUnit } = React.useContext(
+    CurrentTemperatureUnitContext
+  );
 
   return (
     <main>
-      {isMobileMenuOpened ? <></> : <WeatherCard weatherData={weatherData} />}
-
+      <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {weatherData.temp[currentTemperatureUnit]} °
-          {currentTemperatureUnit} / You may want to wear:
+          Today is{" "}
+          {currentTemperatureUnit === "C"
+            ? weatherData.temp.C + "°C"
+            : weatherData.temp.F + "°F"}{" "}
+          / You may want to wear:
         </p>
         <ul className="cards__list">
           {clothingItems
@@ -29,9 +33,11 @@ function Main({
             .map((item) => {
               return (
                 <ItemCard
+                  onCardClick={handleCardClick}
                   key={item._id}
                   item={item}
-                  handleCardClick={handleCardClick}
+                  onCardLike={onCardLike}
+                  deleteCard={deleteCard}
                 />
               );
             })}
