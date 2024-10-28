@@ -1,7 +1,10 @@
-import headerLogo from "../../assets/logo.png";
 import "./Header.css";
-import { Link } from "react-router-dom";
+
+import logo from "../../assets/logo.png";
+import menu from "../../assets/menu-icon.png";
+import close from "../../assets/close-gray.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
@@ -11,22 +14,15 @@ function Header({
   handleSignUpClick,
   weatherData,
   isLoggedIn,
+  toggleMobileMenu,
+  isMobileMenuOpened,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
-
-  const DateComponent = () => {
-    const currentDate = new Date();
-    const options = {
-      month: "long",
-      day: "numeric",
-    };
-    const formattedDate = currentDate.toLocaleDateString("en-US", options);
-    return (
-      <h2 className="date">
-        {formattedDate}, {weatherData.city}
-      </h2>
-    );
-  };
+  //DATE
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
 
   const getInitials = (name) => {
     return name ? name.charAt(0).toUpperCase() : "";
@@ -82,12 +78,37 @@ function Header({
   };
 
   return (
-    <header>
-      <nav className="header">
+    <header className="header">
+      <nav
+        className={`header__nav ${
+          isMobileMenuOpened ? "header__nav_mobile" : ""
+        }`}
+      >
         <Link to="/">
-          <img className="header__logo" src={headerLogo} alt="App Logo" />
+          <img src={logo} alt="Logo" className="header__logo" />
         </Link>
-        <DateComponent />
+        <p className="header__date-location">
+          {currentDate}, {weatherData.city}
+        </p>
+        {isMobileMenuOpened ? (
+          <button className=" header__menu_close" type="button">
+            <img
+              src={close}
+              alt="close-icon"
+              className="  header__menu_close_img"
+              onClick={toggleMobileMenu}
+            />
+          </button>
+        ) : (
+          <button className="header__menu" type="button">
+            <img
+              src={menu}
+              alt="menu-icon"
+              className="header__menu_img"
+              onClick={toggleMobileMenu}
+            />
+          </button>
+        )}
 
         <div className="header__user-container">
           <ToggleSwitch />

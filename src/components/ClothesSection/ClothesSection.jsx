@@ -26,19 +26,15 @@ function ClothesSection({
 
       <ul className="clothesSection__list">
         {clothingItems
-          .filter((item) => {
-            return item.owner === currentUser._id;
-          })
-          .map((item) => {
-            return (
-              <ItemCard
-                onCardClick={handleCardClick}
-                key={item._id}
-                item={item}
-                onCardLike={onCardLike}
-              />
-            );
-          })}
+          .filter((item) => item.owner === currentUser._id)
+          .map((item, index) => (
+            <ItemCard
+              onCardClick={handleCardClick}
+              key={`${item._id}-${index}`}
+              item={item}
+              onCardLike={onCardLike}
+            />
+          ))}
       </ul>
     </div>
   );
