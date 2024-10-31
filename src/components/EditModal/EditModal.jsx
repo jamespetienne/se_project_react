@@ -1,17 +1,29 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useEffect } from "react";
 import { useForm } from "../../Hooks/useForm.js";
 
-const EditModal = ({ isOpen, closeActiveModal, onEdit }) => {
-  const { values, handleChange } = useForm({
+const EditModal = ({ isOpen, closeActiveModal, onEdit, currentUser }) => {
+  const { values, handleChange, setValues } = useForm({
     name: "",
     avatar: "",
   });
+
+  // Update form values with current user data when modal opens
+  useEffect(() => {
+    if (isOpen && currentUser) {
+      setValues({
+        name: currentUser.name || "",
+        avatar: currentUser.avatar || "",
+      });
+    }
+  }, [isOpen, currentUser, setValues]);
 
   const { name, avatar } = values;
 
   function handleSubmit(e) {
     e.preventDefault();
     onEdit(values);
+    closeActiveModal(); // Close modal after submission
   }
 
   return (

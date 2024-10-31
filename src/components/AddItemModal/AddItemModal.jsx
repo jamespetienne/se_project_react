@@ -14,7 +14,7 @@ const AddItemModal = ({ isOpen, onAddItem, closeActiveModal }) => {
   return (
     <ModalWithForm
       closeActiveModal={closeActiveModal}
-      title="New garmet"
+      title="New Garment"
       buttonText="Add Garment"
       isOpen={isOpen}
       onSubmit={handleSubmit}
@@ -50,14 +50,11 @@ const AddItemModal = ({ isOpen, onAddItem, closeActiveModal }) => {
             type="radio"
             name="weather"
             className="modal__radio-input"
-            id="Hot"
+            id="hot"
             value="Hot"
             onChange={handleChange}
           />
-          <label
-            htmlFor="hot"
-            className="modal__input modal__input_type_radio modal__input_type_radio-hot"
-          >
+          <label htmlFor="hot" className="modal__input modal__input_type_radio">
             Hot
           </label>
         </div>
@@ -67,10 +64,9 @@ const AddItemModal = ({ isOpen, onAddItem, closeActiveModal }) => {
             className="modal__radio-input"
             name="weather"
             id="warm"
-            value="warm"
+            value="Warm"
             onChange={handleChange}
           />
-
           <label
             htmlFor="warm"
             className="modal__input modal__input_type_radio"
@@ -83,11 +79,10 @@ const AddItemModal = ({ isOpen, onAddItem, closeActiveModal }) => {
             type="radio"
             className="modal__radio-input"
             name="weather"
-            id="Cold"
+            id="cold"
             value="Cold"
             onChange={handleChange}
           />
-
           <label
             htmlFor="cold"
             className="modal__input modal__input_type_radio"

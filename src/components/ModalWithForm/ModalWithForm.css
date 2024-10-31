@@ -116,9 +116,8 @@
   border: none;
   color: rgba(0, 0, 0, 0.5);
 }
-
-.modal__input_type_radio-hot {
-  color: rgba(0, 0, 0, 1);
+.modal__radio-input:checked + .modal__input_type_radio {
+  color: black;
 }
 
 .modal__submit-button {

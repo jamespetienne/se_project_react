@@ -65,21 +65,14 @@ function App() {
       return;
     }
 
-    !isLiked
-      ? addCardLike(_id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === _id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err))
-      : removeCardLike(_id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === _id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err));
+    const action = isLiked ? removeCardLike : addCardLike;
+    action(_id, token)
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === _id ? updatedCard : item))
+        );
+      })
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -89,7 +82,6 @@ function App() {
         .then((res) => {
           setCurrentUser(res);
           setIsLoggedIn(true);
-          console.log("User is logged in:", isLoggedIn); // Debugging check
         })
         .catch((err) => console.error("Token check failed", err));
     }
@@ -122,11 +114,10 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setActiveModal("");
+          closeActiveModal();
           checkToken(res.token).then((userResponse) => {
             setCurrentUser(userResponse);
             setIsLoggedIn(true);
-            console.log("User is logged in:", isLoggedIn); // Debugging check
           });
         } else {
           throw new Error("Token not received");
@@ -234,7 +225,6 @@ function App() {
                   />
                 }
               />
-
               <Route
                 path="/main"
                 element={
@@ -249,7 +239,6 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-
               <Route
                 path="/profile"
                 element={
@@ -276,12 +265,13 @@ function App() {
               isOpen={activeModal === "confirm"}
               card={selectedCard}
               onConfirm={handleDeleteItem}
-              closeActiveModal={() => setActiveModal("")}
+              closeActiveModal={closeActiveModal}
             />
             <EditModal
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "edit"}
               onEdit={onEdit}
+              currentUser={currentUser}
             />
             <LoginModal
               closeActiveModal={closeActiveModal}
@@ -298,7 +288,7 @@ function App() {
             <ItemModal
               isOpened={activeModal === "preview"}
               selectedCard={selectedCard}
-              handleCloseClick={() => setActiveModal("")}
+              handleCloseClick={closeActiveModal}
               openDeleteModal={handleConfirmClick}
             />
 

@@ -1,5 +1,6 @@
 const baseUrl = "http://localhost:3001";
 const headers = { "Content-Type": "application/json" };
+
 function _checkResponse(res) {
   if (res.ok) {
     return res.json();
@@ -7,56 +8,50 @@ function _checkResponse(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
-function getItems() {
-  return fetch(`${baseUrl}/items`).then(_checkResponse);
+function _getHeaders(token) {
+  return {
+    ...headers,
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
 }
 
+// Fetch items
+function getItems() {
+  return fetch(`${baseUrl}/items`, { headers }).then(_checkResponse);
+}
+
+// Add an item
 function addItems(name, imageUrl, weather) {
   const token = localStorage.getItem("jwt");
-  console.log("Token:", token);
-  const payload = {
-    name,
-    imageUrl,
-    weather,
-  };
-  console.log("Payload:", payload);
-
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}`, ...headers },
-    body: JSON.stringify(payload),
+    headers: _getHeaders(token),
+    body: JSON.stringify({ name, imageUrl, weather }),
   }).then(_checkResponse);
 }
 
+// Delete an item
 function deleteItems(id) {
   const token = localStorage.getItem("jwt");
-  console.log("ID:", id);
-  console.log("Token:", token);
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${token}`, ...headers },
-  })
-    .then(_checkResponse)
-    .then(() => console.log("Card has been deleted"));
+    headers: _getHeaders(token),
+  }).then(_checkResponse);
 }
 
+// Add like to a card
 function addCardLike(id, token) {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: _getHeaders(token),
   }).then(_checkResponse);
 }
 
+// Remove like from a card
 function removeCardLike(id, token) {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: _getHeaders(token),
   }).then(_checkResponse);
 }
 
