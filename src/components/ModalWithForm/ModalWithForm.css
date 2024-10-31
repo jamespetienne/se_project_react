@@ -11,24 +11,24 @@
   display: hidden;
   visibility: hidden;
   z-index: 999;
+  font: 700 16px/20px Cabinet Grotesk, Arial, sans-serif;
 }
 
 .modal_open {
   visibility: visible;
 }
 
-.modal__form {
+.modal__container {
+  position: relative;
   background-color: #ffffff;
+  padding: 28px 28px 36px;
+  border-radius: 20px;
+  width: 496px;
+}
+
+.modal__form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 496px;
-  border-color: rgba(0, 0, 0, 0.3);
-  border-radius: 19px;
-  border-width: 1px;
-  border-style: solid;
-  position: relative;
-  padding: 28px 28px 36px 28px;
 }
 
 .modal__title {
@@ -36,18 +36,17 @@
   font-size: 16px;
   line-height: 20px;
   color: rgba(0, 0, 0, 1);
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 .modal__close {
-  background: url(../../assets/close-gray.png) no-repeat;
   padding: 0;
   background-color: transparent;
   border-style: none;
   position: absolute;
-  width: 20px;
-  height: 20px;
   top: 20px;
-  right: 28px;
+  right: 20px;
   cursor: pointer;
 }
 
@@ -123,37 +122,24 @@
 }
 
 .modal__submit-button {
-  width: 100%;
-  height: 100%;
-  gap: 8px;
-  padding: 8, 16;
-  border-radius: 4px;
+  margin-top: 24px;
+  color: #ffffff;
   background-color: rgba(0, 0, 0, 0.3);
-  font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  color: rgba(255, 255, 255, 1);
-  text-align: center;
-  white-space: nowrap;
-}
-
-.modal__login-wrapper {
-  display: flex;
-  width: 158px;
-  height: 36px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border-style: none;
+  cursor: pointer;
+  font: 16px/20px CabinetGrotesk, Arial, Helvetica, sans-serif;
 }
 
 .modal__span-button {
-  margin: 8px 0px 8px 12px;
+  margin: 0;
   width: 73px;
   height: 20px;
-  font-family: "CabinetGrotesk", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
+  font: 700 16px/20px CabinetGrotesk, Arial, Helvetica, sans-serif;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0 0 0 12px;
   white-space: nowrap;
   background: transparent;
   color: rgba(0, 0, 0, 0.5);

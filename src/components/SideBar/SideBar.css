@@ -39,7 +39,7 @@
   margin-top: 24px;
   margin-bottom: 8px;
   border: 0;
-  background: white;
+  background: #f3f3f3;
 }
 
 .sidebar__signout-btn {
@@ -52,5 +52,5 @@
   line-height: 25px;
   white-space: nowrap;
   padding: 0;
-  background: white;
+  background: #f3f3f3;
 }

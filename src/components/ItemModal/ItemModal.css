@@ -1,7 +1,3 @@
-.modal__container {
-  font-weight: 700;
-}
-
 .modal__content_type_image {
   width: 498px;
   padding: 0;
@@ -16,23 +12,28 @@
 }
 
 .modal__footer {
-  padding: 0 32px;
   display: flex;
   justify-content: space-between;
+  padding: 20px 32px;
+  background: #ffffff;
+  border-radius: 0 0 16px 16px;
 }
 
 .modal__card_name {
   font-size: 20px;
   line-height: 24px;
+  margin: 0;
+  padding: 0 0 12px;
 }
 
 .modal__card_weather {
   font-size: 20px;
   line-height: 24px;
+  margin: 0;
 }
 
 .modal__footer_delete {
-  padding: 20px 0 0;
+  margin: 0;
 }
 
 .modal__card_delete {
@@ -40,6 +41,7 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font: 20px/20px Cabinet Grotesk-Bold, Arial, sans-serif;
 }
 
 @media screen and (max-width: 620px) {
