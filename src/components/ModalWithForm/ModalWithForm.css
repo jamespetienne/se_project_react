@@ -98,9 +98,12 @@
   margin-bottom: 8px;
 }
 
+.modal__radio-container:last-child {
+  margin-bottom: 0;
+}
+
 .modal__radio-buttons {
   display: grid;
-  height: 108px;
   width: 173px;
   border-style: none;
   font-family: CabinetGrotesk-Bold, Arial, Helvetica, sans-serif;
