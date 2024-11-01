@@ -1,6 +1,6 @@
 .sidebar-page {
   display: flex;
-  width: 229px;
+  min-width: 229px;
   height: 138px;
   margin-top: 19px;
   flex-direction: column;
