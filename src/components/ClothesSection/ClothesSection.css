@@ -21,14 +21,19 @@
 }
 
 .clothesSection__list {
-  width: 1015px;
+  /* width: 1015px;
   height: 676px;
   padding: 0;
   display: grid;
   grid-template-columns: 328px 328px 328px;
   grid-column: 3;
   grid-row: 2;
-  gap: 20px 20px;
+  gap: 20px 20px; */
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0;
 }
 
 .clothesSection__add-new-btn {
@@ -40,4 +45,5 @@
   font-size: 20px;
   color: rgba(0, 0, 0, 0.6);
   white-space: nowrap;
+  cursor: pointer;
 }

@@ -40,6 +40,7 @@
   margin-bottom: 8px;
   border: 0;
   background: #f3f3f3;
+  cursor: pointer;
 }
 
 .sidebar__signout-btn {
@@ -53,4 +54,5 @@
   white-space: nowrap;
   padding: 0;
   background: #f3f3f3;
+  cursor: pointer;
 }

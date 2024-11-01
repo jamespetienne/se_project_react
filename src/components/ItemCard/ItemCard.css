@@ -35,6 +35,7 @@
 .card__like-btn {
   width: 18px;
   height: 15px;
+  cursor: pointer;
 }
 
 .card__wrapper {
