@@ -1,4 +1,11 @@
-export const weatherOptions = [
+import process from "process";
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr-project.twilightparadox.com"
+    : "http://localhost:3001";
+
+const weatherOptions = [
   {
     day: true,
     condition: "clear",
@@ -61,7 +68,7 @@ export const weatherOptions = [
   },
 ];
 
-export const defaultWeatherOption = {
+const defaultWeatherOption = {
   day: {
     url: new URL("../assets/default/day.png", import.meta.url).href,
   },
@@ -70,7 +77,7 @@ export const defaultWeatherOption = {
   },
 };
 
-export const defaultClothingItems = [
+const defaultClothingItems = [
   {
     _id: 0,
     name: "Cap",
@@ -109,9 +116,18 @@ export const defaultClothingItems = [
   },
 ];
 
-export const coordinates = {
+const coordinates = {
   latitude: 40.8829952,
   longitude: -74.0436741,
 };
 
-export const APIkey = "a17d6d3eb966b66dc6b9174af61d2902";
+const APIkey = "a17d6d3eb966b66dc6b9174af61d2902";
+
+export {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+  baseUrl,
+  weatherOptions,
+  defaultWeatherOption,
+};

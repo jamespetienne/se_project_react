@@ -1,6 +1,6 @@
 import { _checkResponse } from "./api"; // Ensure _checkResponse is reused
 
-const baseUrl = "http://localhost:3001";
+import { baseUrl } from "../utils/constants";
 const headers = { "Content-Type": "application/json" };
 
 function signUp(name, avatar, email, password) {
