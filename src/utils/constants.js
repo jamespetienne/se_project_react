@@ -5,6 +5,8 @@ const baseUrl =
     ? "https://api.wtwr-project.twilightparadox.com"
     : "http://localhost:3001";
 
+console.log("Environment:", process.env.NODE_ENV);
+
 const weatherOptions = [
   {
     day: true,
