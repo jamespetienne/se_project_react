@@ -1,7 +1,9 @@
 const baseUrl =
-  import.meta.env.MODE === "production"
+  process.env.NODE_ENV === "production"
     ? "https://api.wtwr-project.twilightparadox.com"
     : "http://localhost:3001";
+
+console.log("Environment:", process.env.NODE_ENV);
 
 const weatherOptions = [
   {
