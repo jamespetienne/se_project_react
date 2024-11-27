@@ -1,5 +1,3 @@
-import process from "process";
-
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://api.wtwr-project.twilightparadox.com"
